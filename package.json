@@ -6,7 +6,7 @@
   "scripts": {
     "babel-version": "babel --version",
     "build": "babel src -d lib",
-    "prepublish": "npm run build"
+    "preinstall": "npm run build"
   },
   "repository": {
     "type": "git",
