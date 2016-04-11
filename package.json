@@ -19,9 +19,7 @@
   },
   "homepage": "https://github.com/TempusWebDev/ComponentLibrary#readme",
   "dependencies": {
-    "react": "^15.0.1"
-  },
-  "devDependencies": {
+    "react": "^15.0.1",
     "babel": "^6.5.2",
     "babel-cli": "^6.7.5",
     "babel-plugin-react-pure-components": "^2.2.2",
