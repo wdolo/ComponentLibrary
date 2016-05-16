@@ -1,0 +1,16 @@
+.tempus--button{
+  position: relative;
+  background-color: blue;
+  color: white;
+  padding: 10px;
+  border-radius: 3px;
+  outline: none;
+  border: none;
+  box-shadow: 0 2px 2px rgba(31, 31, 31, 0.5);
+  cursor: pointer;
+}
+
+.tempus--button:active{
+  top: 1px;
+  box-shadow: 0 1px 1px rgba(31, 31, 31, 0.3);
+}
