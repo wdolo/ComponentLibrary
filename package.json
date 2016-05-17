@@ -32,6 +32,8 @@
     "babel-preset-stage-1": "^6.5.0",
     "raw-loader": "^0.5.1",
     "react": "^15.0.2",
+    "react-addons-css-transition-group": "^15.0.2",
+    "react-addons-pure-render-mixin": "^15.0.2",
     "react-dom": "^15.0.2",
     "style-loader": "^0.13.1",
     "webpack": "^1.9.11",
