@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 
 import './dropdown.css';
@@ -7,12 +8,15 @@ class Dropdown extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: this.props.open
+      open: this.props.open,
+      items: this.props.children
     }
     this.close     = this.close.bind(this);
     this.toggle    = this.toggle.bind(this);
     this.getToggle = this.getToggle.bind(this);
-    this.click     = this.click.bind(this)
+    this.search    = this.search.bind(this);
+    this.click     = this.click.bind(this);
+    this.getSearch = this.getSearch.bind(this);
   }
   close = () => {
     const open = false;
@@ -22,10 +26,34 @@ class Dropdown extends Component {
     const open = !this.state.open;
     this.setState({ open });
   }
-  getToggle = (text, onClick, isOpen) => {
+  search = (e) => {
+    this.setState({
+      items: this.props.children
+      .filter(child => child.props.children.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1)
+    })
+  }
+  getSearch() {
+    return this.state.open && this.props.searchable ? (
+      <div classBane="input-field col s6">
+        <input
+          placeholder="Search"
+          id="dropdown_search"
+          type="text"
+          className="validate"
+          onFocus={(e) => e.stopPropagation()}
+          onClick={(e) => e.stopPropagation()}
+          onChange={this.search}
+         />
+      </div>
+    ) : null;
+  }
+  getToggle = (onClick, isOpen) => {
     return (
-      <div className={'' + (isOpen ? ' active' : '')}>
-        <button className="dropdown-button btn" type="button" onClick={onClick}>{text}</button>
+      <div onClick={onClick} className={'' + (isOpen ? ' active' : '')}>
+        <div className={isOpen && this.props.searchable ? ' hideTrigger' : null}>
+          {this.props.trigger}
+        </div>
+        {this.getSearch()}
       </div>
     );
   }
@@ -33,22 +61,20 @@ class Dropdown extends Component {
     this.close();
   }
   render() {
-    const {text, direction, className} = this.props;
+    // TODO: make key unique
+    const {direction, className} = this.props;
     return (
       <DropdownMenu
         isOpen={this.state.open}
         forceCloseFunction={this.close}
-        toggle={this.getToggle(text, this.toggle, this.state.open)}
-         direction={direction}
-         key={'example'}
-         className={className}
+        toggle={this.getToggle(this.toggle, this.state.open)}
+        direction={direction}
+        key={'example'}
+        className={className}
+        searchable={this.props.searchable}
        >
         <ul>
-          <DropdownMenuItem>Example 1</DropdownMenuItem>
-          <DropdownMenuItem>Example 2</DropdownMenuItem>
-          <DropdownMenuItem>Lorem ipsum pretend</DropdownMenuItem>
-          <li className="separator" role="separator" />
-          <DropdownMenuItem>Example 3</DropdownMenuItem>
+          {this.state.items}
         </ul>
       </DropdownMenu>
 
@@ -56,12 +82,25 @@ class Dropdown extends Component {
   }
 }
 
-Dropdown.propTypes = {};
-Dropdown.defaultProps = { open: false, text: 'hello', direction: 'left', className: '' };
+Dropdown.propTypes = {
+  open: PropTypes.bool.isRequired,
+  directon: PropTypes.string,
+  className: PropTypes.string,
+  searchable: PropTypes.bool
+};
+Dropdown.defaultProps = {
+  open: false,
+  direction: 'left',
+  className: '',
+  trigger: <div></div>,
+  searchable: false
+ };
 
 class DropdownMenu extends Component{
   constructor(props) {
     super(props);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.handleKeyDown      = this.handleKeyDown.bind(this);
   }
   /* Only have the click events enabled when the menu is open */
   componentDidUpdate(prevProps, prevState) {
@@ -71,10 +110,13 @@ class DropdownMenu extends Component{
       window.removeEventListener('click', this.handleClickOutside);
     }
   }
+  componentWillUnMount() {
+    window.removeEventListener('click', this.handleClickOutside);
+  }
 
   /* If clicked element is not in the dropdown menu children, close menu */
   handleClickOutside(e) {
-    const children = this.getDOMNode().getElementsByTagName('*');
+    const children = ReactDOM.findDOMNode(this).getElementsByTagName('*');
     for(let x in children) {
       if(children[x] == e.target) { return; }
     }
@@ -86,13 +128,12 @@ class DropdownMenu extends Component{
     if(key !== 9) { // tab
       return;
     }
-    const items = this.getDOMNode().querySelectorAll('button,a');
+    const items = ReactDOM.findDOMNode(this).querySelectorAll('button,a');
     const id = e.shiftKey ? 1 : items.length - 1;
     if(e.target == items[id]) {
       this.props.forceCloseFunction(e);
     }
   }
-
   render() {
     const items = this.props.isOpen ? this.props.children : null;
 
@@ -101,7 +142,7 @@ class DropdownMenu extends Component{
         {this.props.toggle}
         <CSSTransitionGroup
           transitionEnterTimeout={500}
-          transitionExitTimeout={500}
+          transitionLeaveTimeout={500}
           transitionName={'grow-from-' + this.props.direction}
           component="div"
           className="dd-menu-items" onKeyDown={this.handleKeyDown}>
@@ -118,13 +159,15 @@ DropdownMenu.propTypes = {
   toggle: React.PropTypes.node.isRequired,
   direction: React.PropTypes.oneOf(['center', 'right', 'left']),
   className: React.PropTypes.string,
-  component: React.PropTypes.oneOf(['div', 'span', 'li'])
+  component: React.PropTypes.oneOf(['div', 'span', 'li']),
+  searchable: React.PropTypes.bool.isRequired
 };
 
 DropdownMenu.defaultProps =  {
   direction: 'center',
   className: 'dropdown-button btn',
-  component: 'div'
+  component: 'div',
+  searchable: false
 };
 
 class DropdownMenuItem extends Component{
@@ -162,7 +205,11 @@ DropdownMenuItem.defaultProps = {
   tabIndex: 0,
   component: 'button',
   className: '',
-  childrenProps: {}
+  childrenProps: {},
+  action: () => {}
 };
 
-export default Dropdown;
+export {
+  DropdownMenuItem,
+  Dropdown
+}

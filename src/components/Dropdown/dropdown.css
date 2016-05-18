@@ -341,3 +341,5 @@ h1 {
   outline: none;
   box-shadow: none;
 }
+
+.hideTrigger{ display:none; }
