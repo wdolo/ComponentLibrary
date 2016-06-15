@@ -64,10 +64,11 @@ class Dropdown extends Component {
     // TODO: make key unique
     const {direction, className} = this.props;
     return (
+      <div>
+      {this.getToggle(this.toggle, this.state.open)}
       <DropdownMenu
         isOpen={this.state.open}
         forceCloseFunction={this.close}
-        toggle={this.getToggle(this.toggle, this.state.open)}
         direction={direction}
         key={'example'}
         className={className}
@@ -77,7 +78,7 @@ class Dropdown extends Component {
           {this.state.items}
         </ul>
       </DropdownMenu>
-
+      </div>
     )
   }
 }
@@ -116,6 +117,7 @@ class DropdownMenu extends Component{
 
   /* If clicked element is not in the dropdown menu children, close menu */
   handleClickOutside(e) {
+    console.log('handling click outside');
     const children = ReactDOM.findDOMNode(this).getElementsByTagName('*');
     for(let x in children) {
       if(children[x] == e.target) { return; }
@@ -139,7 +141,6 @@ class DropdownMenu extends Component{
 
     return (
       <div className={'dd-menu' + (this.props.className ? ' ' + this.props.className : '')}>
-        {this.props.toggle}
         <CSSTransitionGroup
           transitionEnterTimeout={500}
           transitionLeaveTimeout={500}
@@ -156,7 +157,6 @@ class DropdownMenu extends Component{
 DropdownMenu.propTypes = {
   isOpen: React.PropTypes.bool.isRequired,
   forceCloseFunction: React.PropTypes.func.isRequired,
-  toggle: React.PropTypes.node.isRequired,
   direction: React.PropTypes.oneOf(['center', 'right', 'left']),
   className: React.PropTypes.string,
   component: React.PropTypes.oneOf(['div', 'span', 'li']),
@@ -165,7 +165,7 @@ DropdownMenu.propTypes = {
 
 DropdownMenu.defaultProps =  {
   direction: 'center',
-  className: 'dropdown-button btn',
+  className: '',
   component: 'div',
   searchable: false
 };
@@ -175,6 +175,7 @@ class DropdownMenuItem extends Component{
     super(props);
     this.state = {
     }
+    this.handleClick = this.handleClick.bind(this);
 
   }
   handleKeyDown(e) {
@@ -184,11 +185,14 @@ class DropdownMenuItem extends Component{
       this.props.action();
     }
   }
+  handleClick(e) {
 
+    this.props.action();
+  }
   render() {
     const children = React.createElement(this.props.component, this.props.childrenProps, this.props.children);
     return (
-      <li className={this.props.className} onClick={this.props.action}>
+      <li className={this.props.className} onClick={this.handleClick}>
         {children}
       </li>
     );
@@ -211,5 +215,6 @@ DropdownMenuItem.defaultProps = {
 
 export {
   DropdownMenuItem,
-  Dropdown
+  Dropdown,
+  DropdownMenu
 }

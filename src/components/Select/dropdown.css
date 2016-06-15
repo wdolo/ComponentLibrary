@@ -1,0 +1,354 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+/** Animation stuffs */
+/* From compass */
+/* End copy/paste from compass */
+/** Box shadows */
+/* ========================================================= */
+/* Dropdown menu Source */
+/* ========================================================= */
+.dd-menu {
+  /*display: inline-block;*/
+  position: relative;
+  text-align: center;
+}
+.dd-menu.dd-menu-right {
+  text-align: right;
+}
+.dd-menu.dd-menu-right .dd-menu-items {
+  right: 0;
+}
+.dd-menu.dd-menu-right .dd-menu-items button, .dd-menu.dd-menu-right .dd-menu-items a {
+  text-align: right;
+}
+.dd-menu.dd-menu-left {
+  text-align: left;
+}
+.dd-menu.dd-menu-left .dd-menu-items {
+  left: 0;
+}
+.dd-menu.dd-menu-left .dd-menu-items button, .dd-menu.dd-menu-left .dd-menu-items a {
+  text-align: left;
+}
+.dd-menu.dd-menu-center .dd-menu-items {
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+.dd-menu.dd-menu-sm .dd-menu-items {
+  width: 150px;
+}
+.dd-menu.dd-menu-md .dd-menu-items {
+  width: 300px;
+}
+.dd-menu.dd-menu-lg .dd-menu-items {
+  width: 450px;
+}
+.dd-menu.dd-menu-inverse > .dd-menu-items > ol,
+.dd-menu.dd-menu-inverse > .dd-menu-items > ul {
+  color: #ffffff;
+  max-height: 300px;
+  overflow: auto;
+  background-color: #2c3e50;
+}
+.dd-menu.dd-menu-inverse > .dd-menu-items > ol > li:hover,
+.dd-menu.dd-menu-inverse > .dd-menu-items > ol > li > button:focus,
+.dd-menu.dd-menu-inverse > .dd-menu-items > ol > li > a:focus,
+.dd-menu.dd-menu-inverse > .dd-menu-items > ul > li:hover,
+.dd-menu.dd-menu-inverse > .dd-menu-items > ul > li > button:focus,
+.dd-menu.dd-menu-inverse > .dd-menu-items > ul > li > a:focus {
+  color: #ffffff;
+  background-color: #34495e;
+}
+.dd-menu.dd-menu-inverse li.separator {
+  background-color: #34495e;
+}
+.dd-menu .dd-menu-items {
+  position: absolute;
+  z-index: 7;
+  margin-top: 0.5em;
+}
+.dd-menu .dd-menu-items > ul,
+.dd-menu .dd-menu-items > ol {
+  list-style: none;
+  max-height: 300px;
+  overflow: auto;
+  padding: 0;
+  margin: 0;
+  background-color: #ffffff;
+  color: #000000;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.29);
+}
+.dd-menu .dd-menu-items > ul > li:hover,
+.dd-menu .dd-menu-items > ul > li > button:focus,
+.dd-menu .dd-menu-items > ul > li > a:focus,
+.dd-menu .dd-menu-items > ol > li:hover,
+.dd-menu .dd-menu-items > ol > li > button:focus,
+.dd-menu .dd-menu-items > ol > li > a:focus {
+  color: #000000;
+  background-color: #bdc3c7;
+  outline: none;
+}
+.dd-menu .dd-menu-items > ul > li > a,
+.dd-menu .dd-menu-items > ol > li > a {
+  text-decoration: none;
+  color: inherit;
+}
+.dd-menu .dd-menu-items > ul > li > button,
+.dd-menu .dd-menu-items > ul > li > a,
+.dd-menu .dd-menu-items > ol > li > button,
+.dd-menu .dd-menu-items > ol > li > a {
+  font-size: 1em;
+  white-space: pre;
+  padding: 1em 1.5em;
+  font-family: "Roboto", sans-serif;
+  width: 100%;
+  display: block;
+}
+
+.dd-menu> .dd-menu-items > ul > li.selected {
+  background-color: rgba(128,128,128,.2);
+}
+
+.dd-menu li.separator {
+  content: '';
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.15);
+  margin-top: .5em;
+  margin-bottom: .5em;
+}
+
+/* ========================================================= */
+/* Dropdown menu Animations */
+/* ========================================================= */
+.grow-from-left-enter {
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
+  -webkit-transition: -webkit-transform 0.2s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: -webkit-transform 0.2s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: transform 0.2s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: transform 0.2s cubic-bezier(0.5, 1.8, 0.9, 0.8), -webkit-transform 0.2s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+}
+.grow-from-left-enter.grow-from-left-enter-active {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.grow-from-left-leave {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
+  -webkit-transition: -webkit-transform 0.2s ease-out;
+  transition: -webkit-transform 0.2s ease-out;
+  transition: transform 0.2s ease-out;
+  transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
+}
+.grow-from-left-leave.grow-from-left-leave-active {
+  -webkit-transform: scale(0);
+          transform: scale(0);
+}
+
+.grow-from-right-enter {
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transform-origin: 100% 0;
+          transform-origin: 100% 0;
+  -webkit-transition: -webkit-transform 0.2s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: -webkit-transform 0.2s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: transform 0.2s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: transform 0.2s cubic-bezier(0.5, 1.8, 0.9, 0.8), -webkit-transform 0.2s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+}
+.grow-from-right-enter.grow-from-right-enter-active {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.grow-from-right-leave {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transform-origin: 100% 0;
+          transform-origin: 100% 0;
+  -webkit-transition: -webkit-transform 0.2s ease-out;
+  transition: -webkit-transform 0.2s ease-out;
+  transition: transform 0.2s ease-out;
+  transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
+}
+.grow-from-right-leave.grow-from-right-leave-active {
+  -webkit-transform: scale(0);
+          transform: scale(0);
+}
+
+.grow-from-center-enter {
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transform-origin: 50% 0;
+          transform-origin: 50% 0;
+}
+.grow-from-center-enter.grow-from-center-enter-active {
+  -webkit-transition: -webkit-transform 0.2s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: -webkit-transform 0.2s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: transform 0.2s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: transform 0.2s cubic-bezier(0.5, 1.8, 0.9, 0.8), -webkit-transform 0.2s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.grow-from-center-leave {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transform-origin: 50% 0;
+          transform-origin: 50% 0;
+}
+.grow-from-center-leave.grow-from-center-leave-active {
+  -webkit-transition: -webkit-transform 0.2s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: -webkit-transform 0.2s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: transform 0.2s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: transform 0.2s cubic-bezier(0.5, 1.8, 0.9, 0.8), -webkit-transform 0.2s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  -webkit-transform: scale(0);
+          transform: scale(0);
+}
+
+/* ========================================================= */
+/* Pen Stylings */
+/* ========================================================= */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+header {
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  background-color: #3498db;
+  padding: 1.5em;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-flex-shrink: 0;
+      -ms-flex-negative: 0;
+          flex-shrink: 0;
+}
+
+#main {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+@media (min-width: 768px) {
+  main {
+    width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  main {
+    width: 940px;
+  }
+}
+@media (min-width: 1200px) {
+  main {
+    width: 1140px;
+  }
+}
+main {
+  margin-left: auto;
+  margin-right: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+main > .dd-menu {
+  -webkit-flex-basis: 330px;
+      -ms-flex-preferred-size: 330px;
+          flex-basis: 330px;
+  margin: 2em 1.5em;
+}
+
+footer {
+  -webkit-flex-shrink: 0;
+      -ms-flex-negative: 0;
+          flex-shrink: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+  padding: 2em;
+}
+footer > a {
+  color: #4A4A4A;
+}
+
+.clear-btn, .dd-menu .dd-menu-items > ul > li > button,
+.dd-menu .dd-menu-items > ol > li > button {
+  border: none;
+  background-color: transparent;
+}
+
+h1 {
+  margin: 0;
+}
+
+.tab > button {
+  position: relative;
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2em;
+  color: #ffffff;
+  padding: 1em 1.5em;
+  background-color: #1abc9c;
+  border: 0;
+  border-bottom: 2px solid #16a085;
+  box-shadow: inset 0 -2px #16a085;
+}
+.tab > button:focus {
+  box-shadow: inset 0 -2px #16a085, inset 0 0 3px #34495e;
+}
+.tab:active > button, .tab.active > button {
+  top: 1px;
+  outline: none;
+  box-shadow: none;
+}
+
+.hideTrigger{ display:none; }
