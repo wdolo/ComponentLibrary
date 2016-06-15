@@ -4,10 +4,7 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "babel-version": "babel --version",
     "build": "babel src -d lib",
-    "postinstall": "npm run build",
-    "start": "node server.js",
     "test": "NODE_ENV='test' babel-node ./node_modules/karma/bin/karma start ./karma.conf",
     "test:dev": "npm run test -- --watch",
     "storybook": "start-storybook -p 9001",
